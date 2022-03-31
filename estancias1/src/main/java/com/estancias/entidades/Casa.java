@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -26,11 +27,13 @@ public class Casa implements Serializable {
     private int maxDias;
     private double precio;
     private String tipoVivienda;
+    @OneToOne
+    private Comentario comentario;
 
     public Casa() {
     }
 
-    public Casa(String id, String calle, int numero, String codPostal, String ciudad, String pais, String fechaDesde, String fechaHasta, int minDias, int maxDias, double precio, String tipoVivienda) {
+    public Casa(String id, String calle, int numero, String codPostal, String ciudad, String pais, String fechaDesde, String fechaHasta, int minDias, int maxDias, double precio, String tipoVivienda, Comentario comentario) {
         this.id = id;
         this.calle = calle;
         this.numero = numero;
@@ -43,6 +46,7 @@ public class Casa implements Serializable {
         this.maxDias = maxDias;
         this.precio = precio;
         this.tipoVivienda = tipoVivienda;
+        this.comentario = comentario;
     }
 
     public String getId() {
@@ -141,12 +145,23 @@ public class Casa implements Serializable {
         this.tipoVivienda = tipoVivienda;
     }
 
+    public Comentario getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
+    }
+
     @Override
     public String toString() {
-        return "Casa{" + "id=" + id + ", calle=" + calle + ", numero=" + numero + ", codPostal=" + codPostal + ", ciudad=" + ciudad + ", pais=" + pais + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", minDias=" + minDias + ", maxDias=" + maxDias + ", precio=" + precio + ", tipoVivienda=" + tipoVivienda + '}';
+        return "Casa{" + "id=" + id + ", calle=" + calle + ", numero=" + numero + ", codPostal=" + codPostal + ", ciudad=" + ciudad + ", pais=" + pais + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", minDias=" + minDias + ", maxDias=" + maxDias + ", precio=" + precio + ", tipoVivienda=" + tipoVivienda + ", comentario=" + comentario + '}';
+    }
+
+
+    
     }
     
     
     
 
-}

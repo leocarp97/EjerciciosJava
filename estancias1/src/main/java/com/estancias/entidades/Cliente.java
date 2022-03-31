@@ -23,7 +23,7 @@ public class Cliente implements Serializable {
     
     private int numero;
     
-    private String codPosta;
+    private String codPostal;
     
     private String ciudad;
     
@@ -36,15 +36,16 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(String id, String nombre, String calle, int numero, String codPosta, String ciudad, String pais, String email) {
+    public Cliente(String id, String nombre, String calle, int numero, String codPostal, String ciudad, String pais, String email, Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
         this.calle = calle;
         this.numero = numero;
-        this.codPosta = codPosta;
+        this.codPostal = codPostal;
         this.ciudad = ciudad;
         this.pais = pais;
         this.email = email;
+        this.usuario = usuario;
     }
 
     public String getId() {
@@ -79,12 +80,12 @@ public class Cliente implements Serializable {
         this.numero = numero;
     }
 
-    public String getCodPosta() {
-        return codPosta;
+    public String getCodPostal() {
+        return codPostal;
     }
 
-    public void setCodPosta(String codPosta) {
-        this.codPosta = codPosta;
+    public void setCodPostal(String codPosta) {
+        this.codPostal = codPosta;
     }
 
     public String getCiudad() {
@@ -111,10 +112,20 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", calle=" + calle + ", numero=" + numero + ", codPosta=" + codPosta + ", ciudad=" + ciudad + ", pais=" + pais + ", email=" + email + '}';
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", calle=" + calle + ", numero=" + numero + ", codPostal=" + codPostal + ", ciudad=" + ciudad + ", pais=" + pais + ", email=" + email + ", usuario=" + usuario + '}';
     }
+
+   
     
     
     

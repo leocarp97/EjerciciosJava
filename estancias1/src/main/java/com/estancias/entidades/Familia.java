@@ -29,17 +29,22 @@ public class Familia implements Serializable {
     
     @OneToOne
     private Usuario usuario;
+    
+    @OneToOne
+    private Casa casa;
 
     public Familia() {
     }
 
-    public Familia(String id, String nombre, int edadMin, int edadMax, int numHijos, String email) {
+    public Familia(String id, String nombre, int edadMin, int edadMax, int numHijos, String email, Usuario usuario, Casa casa) {
         this.id = id;
         this.nombre = nombre;
         this.edadMin = edadMin;
         this.edadMax = edadMax;
         this.numHijos = numHijos;
         this.email = email;
+        this.usuario = usuario;
+        this.casa = casa;
     }
 
     public String getId() {
@@ -90,11 +95,27 @@ public class Familia implements Serializable {
         this.email = email;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Casa getCasa() {
+        return casa;
+    }
+
+    public void setCasa(Casa casa) {
+        this.casa = casa;
+    }
+
     @Override
     public String toString() {
-        return "Familia{" + "id=" + id + ", nombre=" + nombre + ", edadMin=" + edadMin + ", edadMax=" + edadMax + ", numHijos=" + numHijos + ", email=" + email + '}';
+        return "Familia{" + "id=" + id + ", nombre=" + nombre + ", edadMin=" + edadMin + ", edadMax=" + edadMax + ", numHijos=" + numHijos + ", email=" + email + ", usuario=" + usuario + ", casa=" + casa + '}';
     }
-    
-    
+
+   
     
 }

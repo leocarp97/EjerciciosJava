@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -20,15 +21,21 @@ public class Estancia implements Serializable {
     private String fechaDesde;
 
     private String fechaHasta;
+    @OneToOne
+    private Cliente cliente;
+    @OneToOne
+    private Casa casa;
 
     public Estancia() {
     }
 
-    public Estancia(String id, String huesped, String fechaDesde, String fechaHasta) {
+    public Estancia(String id, String huesped, String fechaDesde, String fechaHasta, Cliente cliente, Casa casa) {
         this.id = id;
         this.huesped = huesped;
         this.fechaDesde = fechaDesde;
         this.fechaHasta = fechaHasta;
+        this.cliente = cliente;
+        this.casa = casa;
     }
 
     public String getId() {
@@ -63,11 +70,28 @@ public class Estancia implements Serializable {
         this.fechaHasta = fechaHasta;
     }
 
-    @Override
-    public String toString() {
-        return "Estancia{" + "id=" + id + ", huesped=" + huesped + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + '}';
+    public Cliente getCliente() {
+        return cliente;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Casa getCasa() {
+        return casa;
+    }
+
+    public void setCasa(Casa casa) {
+        this.casa = casa;
+    }
+
+    @Override
+    public String toString() {
+        return "Estancia{" + "id=" + id + ", huesped=" + huesped + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", cliente=" + cliente + ", casa=" + casa + '}';
+    }
+
+   
     
     
 }
