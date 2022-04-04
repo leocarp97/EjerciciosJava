@@ -1,6 +1,5 @@
 package com.estancias.servicios;
 
-
 import com.estancias.entidades.Comentario;
 import com.estancias.repositorios.ComentarioRepositorio;
 import java.util.List;
@@ -15,15 +14,13 @@ public class ComentarioServicio {
     @Autowired
     ComentarioRepositorio comentarioRepositorio;
 
-
-
     @Transactional(rollbackFor = {Exception.class})
     public Comentario crear(String descripcion) throws Exception {
 
+        validarComentario(descripcion);
         Comentario comentario = new Comentario();
 
         comentario.setDescripcion(descripcion);
-  
 
         comentarioRepositorio.save(comentario);
 
@@ -33,14 +30,13 @@ public class ComentarioServicio {
 
     @Transactional(rollbackFor = {Exception.class})
     public void modificar(String id, String descripcion) throws Exception {
-
+        validarComentario(descripcion);
         Optional<Comentario> respuesta = comentarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
             Comentario comentario = new Comentario();
 
             comentario.setDescripcion(descripcion);
-         
 
             comentarioRepositorio.save(comentario);
 
@@ -66,7 +62,6 @@ public class ComentarioServicio {
         comentarioRepositorio.deleteById(id);
     }
 
-       
     public Comentario buscarPorId(String id) throws Exception {
 
         Optional<Comentario> respuesta = comentarioRepositorio.findById(id);
@@ -74,10 +69,17 @@ public class ComentarioServicio {
         if (respuesta.isPresent()) {
             return respuesta.get();
         } else {
-            throw new Exception("No existe la casa buscada");
+            throw new Exception("No existe el comentario buscado");
         }
 
     }
-    
-    
+
+    private void validarComentario(String descripcion) throws Exception {
+
+        if (descripcion == null || descripcion.isEmpty()) {
+            throw new Exception("La descripcion no puede ser nula");
+        }
+
+    }
+
 }

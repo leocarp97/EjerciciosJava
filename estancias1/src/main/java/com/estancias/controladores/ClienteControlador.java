@@ -21,9 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/cliente")
 public class ClienteControlador {
 
+
     @Autowired
     ClienteServicio clienteServicio;
-
+    
     @Autowired
     UsuarioServicio usuarioServicio;
 
@@ -47,7 +48,7 @@ public class ClienteControlador {
     }
 
     @PostMapping("/form-cliente")
-    public String guardar(RedirectAttributes attr, @RequestParam String nombre, @RequestParam String calle, @RequestParam int numero, @RequestParam String codPostal, @RequestParam String ciudad, @RequestParam String pais, @RequestParam String email, @RequestParam String idUsuario) {
+    public String guardar(RedirectAttributes attr, @RequestParam String nombre, @RequestParam String calle, @RequestParam int numero, @RequestParam String codPostal, @RequestParam String ciudad, @RequestParam String pais, @RequestParam String email, @RequestParam(required = false) String idUsuario) {
 
         try {
             clienteServicio.crear(nombre, calle, numero, codPostal, ciudad, pais, email, idUsuario);
@@ -56,7 +57,7 @@ public class ClienteControlador {
             attr.addFlashAttribute("error", e.getMessage());
             return "redirect:/cliente/form-cliente/";
         }
-        return "redirect:/cliente/list-cliente";
+        return "redirect:/cliente/index";
     }
 
     @GetMapping("/editar-cliente/{id}")

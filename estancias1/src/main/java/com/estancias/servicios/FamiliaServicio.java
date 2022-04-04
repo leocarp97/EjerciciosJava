@@ -25,6 +25,7 @@ public class FamiliaServicio {
     @Transactional(rollbackFor = {Exception.class})
     public Familia crear(String nombre, int edadMin, int edadMax, int numHijos, String email, String idUsuario, String idCasa) throws Exception {
 
+        validarFamilia(nombre, email);
         Familia familia = new Familia();
 
         familia.setNombre(nombre);
@@ -48,6 +49,7 @@ public class FamiliaServicio {
     @Transactional(rollbackFor = {Exception.class})
     public void modificar(String id, String nombre, int edadMin, int edadMax, int numHijos, String email, String idUsuario, String idCasa) throws Exception {
 
+        validarFamilia(nombre, email);
         Optional<Familia> respuesta = familiaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -89,4 +91,14 @@ public class FamiliaServicio {
         familiaRepositorio.deleteById(id);
     }
 
+    private void validarFamilia(String nombre, String email) throws Exception {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new Exception("El nombre no puede ser nulo");
+        }
+
+        if (email == null || email.isEmpty()) {
+            throw new Exception("El email no puede ser nulo");
+        }
+
+    }
 }

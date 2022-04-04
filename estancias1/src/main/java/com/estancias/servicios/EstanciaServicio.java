@@ -65,7 +65,7 @@ public class EstanciaServicio {
     }
 
     @Transactional(readOnly = true)
-    public List<Estancia> listarFamilias() {
+    public List<Estancia> listarEstancias() {
 
         return estanciaRepositorio.findAll();
     }
@@ -75,7 +75,7 @@ public class EstanciaServicio {
         return estanciaRepositorio.findById(id);
     }
 
-    public void eliminarFamilia(String id) {
+    public void eliminarEstancia(String id) {
 
         estanciaRepositorio.deleteById(id);
     }

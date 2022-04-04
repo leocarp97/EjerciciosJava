@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Estancia implements Serializable {
@@ -17,9 +18,9 @@ public class Estancia implements Serializable {
     private String id;
 
     private String huesped;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String fechaDesde;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String fechaHasta;
     @OneToOne
     private Cliente cliente;
@@ -91,7 +92,4 @@ public class Estancia implements Serializable {
         return "Estancia{" + "id=" + id + ", huesped=" + huesped + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", cliente=" + cliente + ", casa=" + casa + '}';
     }
 
-   
-    
-    
 }

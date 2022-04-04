@@ -1,7 +1,5 @@
 package com.estancias.servicios;
 
-
-
 import com.estancias.entidades.Usuario;
 import com.estancias.repositorios.UsuarioRepositorio;
 import java.util.List;
@@ -16,8 +14,10 @@ public class UsuarioServicio {
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
 
-     @Transactional(rollbackFor = {Exception.class})
-    public Usuario crear(String alias, String email, String clave, String fechaAlta, String fechaBaja) {
+    @Transactional(rollbackFor = {Exception.class})
+    public Usuario crear(String alias, String email, String clave, String fechaAlta, String fechaBaja) throws Exception {
+
+        validarUsuario(alias, email, clave);
 
         Usuario usuario = new Usuario();
 
@@ -44,8 +44,11 @@ public class UsuarioServicio {
         }
 
     }
-     @Transactional(rollbackFor = {Exception.class})
+
+    @Transactional(rollbackFor = {Exception.class})
     public void modificar(String id, String alias, String email, String clave, String fechaAlta, String fechaBaja) throws Exception {
+
+        validarUsuario(alias, email, clave);
 
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 
@@ -66,8 +69,8 @@ public class UsuarioServicio {
         }
 
     }
-  
-        @Transactional(readOnly = true)
+
+    @Transactional(readOnly = true)
     public List<Usuario> listarUsuarios() {
 
         return usuarioRepositorio.findAll();
@@ -82,6 +85,20 @@ public class UsuarioServicio {
 
         usuarioRepositorio.deleteById(id);
     }
-    
-    
+
+    private void validarUsuario(String alias, String email, String clave) throws Exception {
+        if (alias == null || alias.isEmpty()) {
+            throw new Exception("El alias no puede ser nulo");
+        }
+
+        if (email == null || alias.isEmpty()) {
+            throw new Exception("El email no puede ser nulo");
+        }
+
+        if (clave == null || alias.isEmpty()) {
+            throw new Exception("La clave no puede ser nulo");
+        }
+
+    }
+
 }

@@ -1,4 +1,3 @@
-
 package com.estancias.entidades;
 
 import java.io.Serializable;
@@ -6,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Usuario implements Serializable {
@@ -16,15 +15,15 @@ public class Usuario implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     private String alias;
-    
+
     private String email;
-    
+
     private String clave;
-    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String fechaAlta;
-    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String fechaBaja;
 
     public Usuario() {
@@ -91,6 +90,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" + "id=" + id + ", alias=" + alias + ", email=" + email + ", clave=" + clave + ", fechaAlta=" + fechaAlta + ", fechaBaja=" + fechaBaja + '}';
     }
-    
-    
+
 }

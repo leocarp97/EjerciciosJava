@@ -21,6 +21,7 @@ public class CasaServicio {
     @Transactional(rollbackFor = {Exception.class})
     public Casa crear(String calle, int numero, String codPostal, String ciudad, String pais, String fechaDesde, String fechaHasta, int minDias, int maxDias, double precio, String tipoVivienda, String idDescripcion) throws Exception {
 
+        validarCasa(calle, codPostal, ciudad, pais, tipoVivienda);
         Casa casa = new Casa();
 
         casa.setCalle(calle);
@@ -46,7 +47,7 @@ public class CasaServicio {
 
     @Transactional(rollbackFor = {Exception.class})
     public void modificar(String id, String calle, int numero, String codPostal, String ciudad, String pais, String fechaDesde, String fechaHasta, int minDias, int maxDias, double precio, String tipoVivienda, String idDescripcion) throws Exception {
-
+        validarCasa(calle, codPostal, ciudad, pais, tipoVivienda);
         Optional<Casa> respuesta = casaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -104,4 +105,25 @@ public class CasaServicio {
 
     }
 
+    private void validarCasa(String calle, String codPostal, String ciudad, String pais, String tipoVivienda) throws Exception {
+
+        if (calle == null || calle.isEmpty()) {
+            throw new Exception("La calle no puede ser nula");
+        }
+
+        if (codPostal == null || codPostal.isEmpty()) {
+            throw new Exception("El codigo postal no puede ser nulo");
+        }
+
+        if (ciudad == null || ciudad.isEmpty()) {
+            throw new Exception("La ciudad  no puede ser nula");
+        }
+
+        if (pais == null || pais.isEmpty()) {
+            throw new Exception("El pais no puede ser nulo");
+        }
+        if (tipoVivienda == null || tipoVivienda.isEmpty()) {
+            throw new Exception("El tipo de vivienda no puede ser nulo");
+        }
+    }
 }

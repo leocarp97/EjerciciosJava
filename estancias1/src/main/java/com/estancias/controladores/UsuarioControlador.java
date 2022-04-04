@@ -36,12 +36,12 @@ public class UsuarioControlador {
     }
     
     @PostMapping("/form-usuario")
-    public String guardar(ModelMap model, @RequestParam String alias, @RequestParam String email, @RequestParam String clave, @RequestParam String fechaDesde, @RequestParam String fechaHasta) {
+    public String guardar(ModelMap model, @RequestParam String alias, @RequestParam String email, @RequestParam String clave, @RequestParam String fechaAlta, @RequestParam String fechaBaja) {
         
         try {
-            usuarioServicio.crear(alias, email, clave, fechaHasta, fechaHasta);
+            usuarioServicio.crear(alias, email, clave, fechaAlta, fechaBaja);
             
-            return "redirect:/usuario/list-usuario";
+            return "redirect:/usuario/index";
         } catch (Exception e) {
             
             return "list-usuario";
@@ -64,10 +64,10 @@ public class UsuarioControlador {
     }
     
     @PostMapping("/actualizar-usuario")
-    public String editar(RedirectAttributes attr, @RequestParam String id, @RequestParam String alias, @RequestParam String email, @RequestParam String clave, @RequestParam String fechaDesde, @RequestParam String fechaHasta) throws Exception {
+    public String editar(RedirectAttributes attr, @RequestParam String id, @RequestParam String alias, @RequestParam String email, @RequestParam String clave, @RequestParam String fechaAlta, @RequestParam String fechaBaja) throws Exception {
         try {
             
-            usuarioServicio.modificar(id, alias, email, clave, fechaHasta, fechaHasta);
+            usuarioServicio.modificar(id, alias, email, clave, fechaAlta, fechaBaja);
             
         } catch (Exception e) {
             attr.addFlashAttribute("error", e.getMessage());
