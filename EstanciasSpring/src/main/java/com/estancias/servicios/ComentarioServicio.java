@@ -34,7 +34,8 @@ public class ComentarioServicio {
         Optional<Comentario> respuesta = comentarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
-            Comentario comentario = new Comentario();
+         
+              Comentario comentario = respuesta.get();
 
             comentario.setDescripcion(descripcion);
 

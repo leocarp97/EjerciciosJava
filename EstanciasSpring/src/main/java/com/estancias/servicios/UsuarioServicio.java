@@ -2,14 +2,25 @@ package com.estancias.servicios;
 
 import com.estancias.entidades.Usuario;
 import com.estancias.repositorios.UsuarioRepositorio;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
@@ -23,7 +34,10 @@ public class UsuarioServicio {
 
         usuario.setAlias(alias);
         usuario.setEmail(email);
-        usuario.setClave(clave);
+
+        String claveEncriptada = new BCryptPasswordEncoder().encode(clave);
+
+        usuario.setClave(claveEncriptada);
         usuario.setFechaAlta(fechaAlta);
         usuario.setFechaBaja(fechaBaja);
 
@@ -54,7 +68,7 @@ public class UsuarioServicio {
 
         if (respuesta.isPresent()) {
 
-            Usuario usuario = new Usuario();
+            Usuario usuario = respuesta.get();
 
             usuario.setAlias(alias);
             usuario.setEmail(email);
@@ -98,6 +112,28 @@ public class UsuarioServicio {
         if (clave == null || alias.isEmpty()) {
             throw new Exception("La clave no puede ser nulo");
         }
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario u = usuarioRepositorio.buscarPorEmail(email);
+
+        if (u == null) {
+            return null;
+        }
+
+        List<GrantedAuthority> permisos = new ArrayList<>();
+
+        GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
+        permisos.add(p1);
+
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+        HttpSession session = attr.getRequest().getSession(true);
+        session.setAttribute("usuariosession", u);
+
+        return new User(u.getEmail(), u.getClave(), permisos);
 
     }
 

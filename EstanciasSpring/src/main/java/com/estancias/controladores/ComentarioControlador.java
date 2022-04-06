@@ -64,8 +64,8 @@ public class ComentarioControlador {
 
     }
 
-    @PostMapping("/actualizar-comentario/{id}")
-    public String editar(RedirectAttributes attr, @PathVariable String id, @RequestParam String descripcion) throws Exception {
+    @PostMapping("/actualizar-comentario")
+    public String editar(RedirectAttributes attr, @RequestParam String id, @RequestParam String descripcion) throws Exception {
         try {
 
             comentarioServicio.modificar(id, descripcion);

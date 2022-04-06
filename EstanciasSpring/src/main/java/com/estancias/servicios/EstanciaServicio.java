@@ -46,7 +46,7 @@ public class EstanciaServicio {
 
         if (respuesta.isPresent()) {
 
-            Estancia estancia = new Estancia();
+            Estancia estancia = respuesta.get();
 
             estancia.setHuesped(huesped);
             estancia.setFechaDesde(fechaDesde);

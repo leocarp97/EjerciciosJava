@@ -16,78 +16,78 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioControlador {
-    
+
     @Autowired
     UsuarioServicio usuarioServicio;
-    
+
     @GetMapping("/list-usuario")
     public String listarUsuarios(ModelMap model) {
-        
+
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-        
+
         model.addAttribute("usuarios", usuarios);
-        
+
         return "list-usuario";
     }
-    
+
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
     }
-    
+
     @PostMapping("/form-usuario")
     public String guardar(ModelMap model, @RequestParam String alias, @RequestParam String email, @RequestParam String clave, @RequestParam String fechaAlta, @RequestParam String fechaBaja) {
-        
+
         try {
             usuarioServicio.crear(alias, email, clave, fechaAlta, fechaBaja);
-            
+
             return "redirect:/usuario/index";
         } catch (Exception e) {
-            
+
             return "list-usuario";
         }
     }
-    
+
     @GetMapping("/editar-usuario/{id}")
     public String editar(ModelMap model, @PathVariable String id) throws Exception {
-        
+
         try {
-            
+
             Usuario usuario = usuarioServicio.buscarPorId(id);
             model.addAttribute("usuario", usuario);
-            
+
             return "edit-usuario";
         } catch (Exception e) {
             return "edit-usuario";
         }
-        
+
     }
-    
+
     @PostMapping("/actualizar-usuario")
     public String editar(RedirectAttributes attr, @RequestParam String id, @RequestParam String alias, @RequestParam String email, @RequestParam String clave, @RequestParam String fechaAlta, @RequestParam String fechaBaja) throws Exception {
         try {
-            
+
             usuarioServicio.modificar(id, alias, email, clave, fechaAlta, fechaBaja);
-            
+
         } catch (Exception e) {
             attr.addFlashAttribute("error", e.getMessage());
             return "redirect:/usuario/editar-usuario/" + id;
         }
         return "redirect:/usuario/list-usuario";
     }
-    
+
     @GetMapping("/eliminar-usuario/{id}")
     public String eliminar(@PathVariable String id) {
-        
+
         usuarioServicio.eliminarUsuario(id);
-        
+
         return "redirect:/usuario/list-usuario/";
-        
+
     }
-    
+
     @GetMapping("index")
     public String index() {
         return "index";
     }
-    
+
 }

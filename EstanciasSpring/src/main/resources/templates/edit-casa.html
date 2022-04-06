@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Editar Casa</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+
+        <form th:action="@{/casa/actualizar-casa}" method="POST">
+            <input type="hidden" th:value="${casa.id}" name="id"/>
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <p th:text="${error}" class="text-danger"></p>
+                        <label>Calle</label> <input type="text" class="form-control"  name="calle" th:value="${casa.calle}" placeholder="Calle">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Numero</label> <input type="text" class="form-control"  name="numero" th:value="${casa.numero}" placeholder="Mumero">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Codigo Postal</label> <input type="text" class="form-control" name="codPostal" th:value="${casa.codPostal}" placeholder="Codigo Postal">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Ciudad</label> <input type="text" class="form-control" name="ciudad" th:value="${casa.ciudad}" placeholder="Ciudad">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Pais</label> <input type="text" class="form-control" name="pais" th:value="${casa.pais}" placeholder="Pais">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Fecha Desde</label> <input type="date" class="form-control" name="fechaDesde" th:value="${casa.fechaDesde}" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Fecha Hasta</label> <input type="date" class="form-control" name="fechaHasta" th:value="${casa.fechaHasta}" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Dias minimos</label> <input type="text" class="form-control" name="minDias" th:value="${casa.minDias}" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Dias maximos</label> <input type="text" class="form-control" name="maxDias" th:value="${casa.maxDias}" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Precio</label> <input type="text" class="form-control" name="precio" th:value="${casa.precio}" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Tipo Vivienda</label> <input type="text" class="form-control" name="tipoVivienda" th:value="${casa.tipoVivienda}" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label>Descripcion Casa</label> 
+                        <select class="form-control" name="idDescripcion" placeholder=" ">
+                            <option th:each="comentario : ${comentarios}" th:value="${comentario.id}" th:text="${comentario.descripcion}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" formaction="/casa/list-casa" class="btn btn-dark" formmethod="GET">Volver</button>
+                <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+            </div>
+        </form>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
