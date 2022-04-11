@@ -27,4 +27,9 @@ public class MainControlador {
 
         return "login.html";
     }
+
+    @GetMapping("/inicio")
+    public String inicio() {
+        return "inicio";
+    }
 }
