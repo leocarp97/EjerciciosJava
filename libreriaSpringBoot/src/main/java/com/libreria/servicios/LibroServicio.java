@@ -119,6 +119,16 @@ public class LibroServicio {
         return libroRepositorio.buscarPorEditorial(nombre);
     }
 
+    @Transactional(readOnly = true)
+    public List<Libro> buscarLibroPorIdAutor(String id) {
+        return libroRepositorio.buscarLibroPorIdAutor(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Libro> buscarLibroPorIdEditorial(String id) {
+        return libroRepositorio.buscarLibroPorIdEditorial(id);
+    }
+
     public Libro buscarPorId(String isbn) throws Exception {
         Optional<Libro> respuesta = libroRepositorio.findById(isbn);
 

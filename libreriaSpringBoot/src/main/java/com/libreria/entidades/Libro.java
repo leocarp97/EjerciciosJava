@@ -25,9 +25,9 @@ public class Libro implements Serializable {
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private boolean alta;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Autor autor;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Editorial editorial;
 
     public Libro() {

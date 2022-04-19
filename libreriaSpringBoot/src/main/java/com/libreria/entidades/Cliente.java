@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -20,17 +21,19 @@ public class Cliente implements Serializable {
     private String apellido;
     private String telefono;
     private Boolean alta;
-
+    @OneToOne
+    private Usuario usuario;
     public Cliente() {
     }
 
-    public Cliente(String id, Long documento, String nombre, String apellido, String telefono, Boolean alta) {
+    public Cliente(String id, Long documento, String nombre, String apellido, String telefono, Boolean alta, Usuario usuario) {
         this.id = id;
         this.documento = documento;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.alta = alta;
+        this.usuario = usuario;
     }
 
     public String getId() {
@@ -81,9 +84,19 @@ public class Cliente implements Serializable {
         this.alta = alta;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", documento=" + documento + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", alta=" + alta + '}';
+        return "Cliente{" + "id=" + id + ", documento=" + documento + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", alta=" + alta + ", usuario=" + usuario + '}';
     }
+
+
  }
    

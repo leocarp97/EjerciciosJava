@@ -80,7 +80,7 @@ public class AutorControlador {
     @GetMapping("/eliminar-autor/{id}")
     public String eliminar(@PathVariable String id) {
 
-        autorServicio.eliminarAutor(id);
+        autorServicio.eliminarPorIdAutor(id);
 
         return "redirect:/autor/list-autor/";
 

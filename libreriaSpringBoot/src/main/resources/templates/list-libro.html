@@ -33,7 +33,7 @@
                     <td th:text="${libro.ejemplares}"></td>
                     <td th:text="${libro.ejemplaresPrestados}"></td>
                     <td th:text="${libro.ejemplaresRestantes}"></td>
-                    <td th:text="${libro.autor.nombre}"></td> 
+                    <td th:text="${libro.autor !=null ? libro.autor.nombre : 'No tiene'}"></td> 
                     <td th:text="${libro.editorial.nombre}"></td>
                     <td>
                         <a th:href="@{/libro/editar-libro/}+${libro.isbn}" class="btn btn-outline-warning">Editar</a>

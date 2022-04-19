@@ -1,4 +1,3 @@
-
 package com.libreria.repositorios;
 
 import com.libreria.entidades.Libro;
@@ -11,13 +10,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LibroRepositorio extends JpaRepository<Libro, String> {
- 
- @Query ("SELECT l FROM Libro l WHERE l.autor.nombre LIKE :nombre")
-    public List<Libro> buscarPorAutor(@Param("nombre") String nombre);
-    
-    @Query ("SELECT l FROM Libro l WHERE l.editorial.nombre LIKE :nombre")
-    public List<Libro> buscarPorEditorial(@Param("nombre") String nombre);
-     
-    
-}
 
+    @Query("SELECT l FROM Libro l WHERE l.autor.nombre LIKE :nombre")
+    public List<Libro> buscarPorAutor(@Param("nombre") String nombre);
+
+    @Query("SELECT l FROM Libro l WHERE l.editorial.nombre LIKE :nombre")
+    public List<Libro> buscarPorEditorial(@Param("nombre") String nombre);
+
+    @Query("SELECT l FROM Libro l WHERE l.autor.id LIKE :id")
+    public List<Libro> buscarLibroPorIdAutor(@Param("id") String id);
+
+    @Query("SELECT l FROM Libro l WHERE l.editorial.id LIKE :id")
+    public List<Libro> buscarLibroPorIdEditorial(@Param("id") String id);
+
+}

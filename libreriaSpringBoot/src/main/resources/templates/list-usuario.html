@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Listar Autores</title>
+        <title>Listar Usuarios</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
@@ -15,25 +15,19 @@
         <table class="table table-danger table-borderless table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Documento</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Alta</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Clave</th>
+                    <th scope="col">Rol</th>
                 </tr>
             </thead>        
 
             <tbody>      
-                <tr th:each="cliente:${clientes}">
-                    <td th:text="${cliente.documento}"></td>
-                    <td th:text="${cliente.nombre}"></td>
-                    <td th:text="${cliente.apellido}"></td>
-                    <td th:text="${cliente.telefono}"></td>
-                    <td th:text="${cliente.alta}"></td>
+                <tr th:each="usuario:${usuarios}">
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${usuario.clave}"></td>
+                    <td th:text="${usuario.rol}"></td>
                     <td>
-
-                        <a th:href="@{/cliente/editar-cliente/}+${cliente.id}" class="btn btn-warning">Editar</a>
-                        <a th:href="@{/cliente/eliminar-cliente/}+${cliente.id}" class="btn btn-danger">Eliminar</a>
+                        <a th:href="@{/usuario/eliminar-usuario/}+${usuario.id}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
 
@@ -41,8 +35,8 @@
 
         </table>
 
-        <a th:href="@{/cliente/form-cliente}" class="btn btn-primary my-2">Cargar Cliente</a>
-        <a th:href="@{/cliente/index}" class="btn btn-primary my-2">Menu</a>
+        <a th:href="@{/usuario/form-usuario}" class="btn btn-primary my-2">Cargar Usuario</a>
+        <a th:href="@{/usuario/index}" class="btn btn-primary my-2">Menu</a>
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
